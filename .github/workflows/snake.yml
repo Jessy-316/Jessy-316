@@ -18,6 +18,14 @@ jobs:
           github_user_name: Jessy-316
           outputs: github-contribution-grid-snake.svg
 
+      - name: Create Output Branch if Not Exists
+        run: |
+          git fetch origin
+          if ! git ls-remote --exit-code --heads origin output; then
+            git branch output
+            git push origin output
+          fi
+
       - name: Commit and Push Changes
         uses: stefanzweifel/git-auto-commit-action@v5
         with:
